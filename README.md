@@ -5,6 +5,9 @@ NotePad源码： https://github.com/llfjfz/NotePad
 在布局文件中增加时间戳
 
 修改前：
+
+
+
 <RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -19,7 +22,13 @@ NotePad源码： https://github.com/llfjfz/NotePad
     />
 </RelativeLayout>
 
+
+
 修改后：新增一个TextView
+
+
+
+
 <RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -45,6 +54,10 @@ NotePad源码： https://github.com/llfjfz/NotePad
 将系统默认的时间显示格式更改为我们自定义时间格式，增加可读性
 
 修改前：
+
+
+
+
 public Uri insert(Uri uri, ContentValues initialValues) {
         if (sUriMatcher.match(uri) != NOTES) {
             throw new IllegalArgumentException("Unknown URI " + uri);
@@ -93,7 +106,12 @@ public Uri insert(Uri uri, ContentValues initialValues) {
         throw new SQLException("Failed to insert row into " + uri);
     }
 
+
+
 修改后：
+
+
+
 	public Uri insert(Uri uri, ContentValues initialValues) {
         if (sUriMatcher.match(uri) != NOTES) {
             throw new IllegalArgumentException("Unknown URI " + uri);
@@ -172,6 +190,12 @@ public Uri insert(Uri uri, ContentValues initialValues) {
     }
 
 修改后：添加默认的毫秒数时间格式
+
+
+
+
+
+
     private final void updateNote(String text, String title) {
         ContentValues values = new ContentValues();
         long now = System.currentTimeMillis();
@@ -219,6 +243,8 @@ public Uri insert(Uri uri, ContentValues initialValues) {
        }
 
 进行时间变量赋值：
+
+
 if (values.containsKey(NotePad.Notes.COLUMN_NAME_CREATE_DATE) == false) {
             values.put(NotePad.Notes.COLUMN_NAME_CREATE_DATE, dateFormat);
         }
@@ -229,6 +255,9 @@ if (values.containsKey(NotePad.Notes.COLUMN_NAME_CREATE_DATE) == false) {
 
 查看Note源码可以发现，他只是显示id以及titile，并没有时间，我们加上时间的显示，cursor就会将新增的时间一并检索，
 而后装载相应数据列，我们一并将其修改并显示时间戳：
+
+
+
 private static final String[] PROJECTION = new String[] {
             NotePad.Notes._ID, // 0
             NotePad.Notes.COLUMN_NAME_TITLE, // 1
@@ -266,3 +295,4 @@ private static final String[] PROJECTION = new String[] {
 
 String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE, NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE };
 int[] viewIDs = { android.R.id.text1, R.id.text2 };
+
